@@ -110,14 +110,15 @@ await newUser.save().then( ()=> { ctx.body = { code:200,
 ```JavaScript  
 fs.readFile( 'json文件路径', 'utf8', (err,data) => {
 //逻辑操作})  
-```  
- <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/insertcategorydb.png"></img>
+```    
 逻辑操作  
 1. data = JSON.parse(data) 
 2. 引入Category的约束Schema
-3. 循环遍历每条数据save到数据库中 如图     
+3. 循环遍历每条数据save到数据库中 如图  
+ <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/insertcategorydb.png"></img>  
+ *** 
 #### 2.4.4 右侧子类的商品数据插入到数据库
 如图: 
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/categorySubjson.png"></img>
 ##  前台
- <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png"></img>
+ <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>
