@@ -2,7 +2,7 @@
 ## 1 总体目录结构
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/catalogue.png"></img>
 ## 2 后台 
-目录结构
+目录结构   
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/be.png"></img>
 ### 2.1  init.js 连接数据库  
 #### 2.1.1  mongoose  
@@ -55,11 +55,11 @@ var schema = new Schema({
 })
 ```  
 定义好约束之后,暴露出去  
-mongoose.model('集合名字` , 集合Schema, 集合名字(防止复数s)
+`mongoose.model('集合名字` , 集合Schema, 集合名字(防止复数s)`
 app项目中的Schema代码  
 #### 2.3.2  User.js
 如图  
-<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/buserSchema.png"></img>
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/userSchema.png"></img>
 密码加盐 `npm instal --save bcrypt --registry=https://registry.npm.taobao.org` 
 bcrypt是一种跨平台的文件加密工具。bcrypt 使用的是布鲁斯·施内尔在1993年发布的 Blowfish 加密算法。由它加密的文件可在所有支持的操作系统和处理器上进行转移。它的口令必须是8至56个字符，并将在内部被转化为448位的密钥   
 每次存储时都要进行. 用在Schema的user.js中.
@@ -88,7 +88,7 @@ __逻辑操作__ :
 2. 把从前端接收的post数据(ctx.request.body)封装成一个new对象//为什么要用new的方式呢?  
      `let newUsr = new  User(ctx.request.body)`  
 3. 用mongoose的save方法存储,要返回时候成功(用异步的方式,.then())    
-```
+```JavaScript  
 await newUser.save().then( ()=> { ctx.body = { code:200,
             message:'注册成功'}).catch( ()=>{ ctx.body={
             code:500,
@@ -107,8 +107,10 @@ await newUser.save().then( ()=> { ctx.body = { code:200,
 `data.数组名称.map(( value,index )=> {let newGoods = new Goods(value) newGoods.save().then().catch()})`  
 #### 2.4.3 左侧商品列表插入数据库 
 同样也是使用node自带的fs模块(readFile)方法  
-```fs.readFile( 'json文件路径', 'utf8', (err,data) => {
-//逻辑操作})```
+```JavaScript  
+fs.readFile( 'json文件路径', 'utf8', (err,data) => {
+//逻辑操作})
+```
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/insertCategorydb.png"></img>
 逻辑操作  
 1. data = JSON.parse(data) 
@@ -118,3 +120,4 @@ await newUser.save().then( ()=> { ctx.body = { code:200,
 如图: 
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/CategorySubjson.png"></img>
 ##  前台
+ <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png"></img>
