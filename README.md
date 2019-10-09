@@ -127,9 +127,9 @@ fs.readFile( 'json文件路径', 'utf8', (err,data) => {
 ### 2.5  接口
 #### 2.5.1 首页接口
 点击图片,进入商品详情页 以id形式向后台(post发送请求),后台请求对应路由,在数据库中查找并返回数据  
- <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/getDetailGoods.png"></img>  
+ <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getDetailGoods.png"></img>  
  代码:  
-  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/getGoodscode.png"></img>
+  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getGoodscode.png"></img>
  
 ##  前台
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>
