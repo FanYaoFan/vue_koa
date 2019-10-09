@@ -94,8 +94,11 @@ await newUser.save().then( ()=> { ctx.body = { code:200,
             code:500,
             message:error
         }})
- ```  
-登录页面同理  但增加了密码&账户比对的方式方法  如图  
+ ```    
+ 注册路由code图: 
+ <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/Login.png"></img>  
+登录页面同理  但增加了密码&账户比对的方式方法
+如图     
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/Login.png"></img>
 #### 2.4.2 商品插入数据库
 新建一个service/appApi/goods.js,关于商品的操作就都在这个api文件中 
@@ -119,6 +122,6 @@ fs.readFile( 'json文件路径', 'utf8', (err,data) => {
  *** 
 #### 2.4.4 右侧子类的商品数据插入到数据库
 如图: 
- <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/categorySubjson.png"></img>
+ <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/categorySubdb.png"></img>
 ##  前台
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>
