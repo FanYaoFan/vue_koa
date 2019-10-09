@@ -119,6 +119,6 @@ fs.readFile( 'json文件路径', 'utf8', (err,data) => {
  *** 
 #### 2.4.4 右侧子类的商品数据插入到数据库
 如图: 
- <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/categorySubjson.png"></img>
+ <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/categorySubdb.png"></img>
 ##  前台
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>
