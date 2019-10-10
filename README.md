@@ -1,4 +1,21 @@
-# Vue Koa 全栈项目  
+# Vue Koa 全栈项目
+***
+## 目录 
+## [1 总体目录结构](#1-总体目录结构)
+## [2 后台](#2-后台)  
+### [2.1 init连接数据库](#21--init-连接数据库)
+### [2.2 glob](#22-glob)
+### [2.3 Schema](#23-schema)
+### [2.4 koa路由模块化](#24-koa路由模块化)
+### [2.5 接口](#25--接口)
+## [3 前台](#3-前台)
+### [3.1 ShoppingMall](#31--shoppingmall)
+### [3.2 Goods](#32--goods)
+### [3.3 Carts](#33--carts-购物车结算)
+### [3.4 categoryList](#34-categorylist)
+### [3.5 Register](#35--register-注册界面)
+### [3.6 Login](#36--login-登录界面)
+***___
 ## 1 总体目录结构
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/catalogue.png"></img>
 ## 2 后台 
@@ -8,7 +25,7 @@
 #### 2.1.1  mongoose  
 使用mongoose来连接数据库.(如果忘记数据库地址可以直接使用mongo来查看数据库地址)
 `mongoose.connect ('mongodb://localhost/app,{autoIndex : false}, {userNewUrlParser : true }`  
-#### 2.2.2  glob
+### 2.2  glob
 ```javascript
 npm install glob --save
 const glob = require('glob')  
@@ -21,6 +38,7 @@ const {resolve} = require('path')
 exports.initSchemas(自定义名称) = () => { glob.sync(resolve(__dirname, './schmea/', '**/*.js')).forEach(require)}
 ```   
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/init.png"></img>
+
 ### 2.3 Schema  
 数据库中的Schema是为数据库对象的集合的一种映射,每个schema会映射到mongodb中的一个collection,它不具备操作数据库的能力
 #### 2.3.1 定义数据库模型(约束) 
@@ -150,8 +168,8 @@ fs.readFile( 'json文件路径', 'utf8', (err,data) => {
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getmainSubIdcode.png"></img>   
 #### 2.5.5  serviceAPI.js
 实际开发中,一般把各个接口配置放在一个js文件中. 如图  
-<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/serviceAPI.png"></img>
-
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/serviceAPI.png"></img>  
+# [回到顶部](#vue-koa-全栈项目)
 ##  3 前台
 前台目录结构  
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>   
@@ -245,7 +263,8 @@ cartInfo.push(newGoodsInfo)
 localStorage.cartInfo = JSON.stringify(cartInfo)  //s => json 格式
 }
  this.$router.push({name:'Cart'(路由名字)})  //进行跳转 也可以用path来跳转  this.$router.push( '/cart'(路由地址))
-```  
+```   
+# [回到顶部](#vue-koa-全栈项目)  
 ### 3.3  Carts 购物车接算 
 如图: 
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/cart.png"></img>  
@@ -379,7 +398,8 @@ data() {
       this.onLoad();
     },
   }
-```
+```  
+# [回到顶部](#vue-koa-全栈项目)  
 ### 3.5  register(注册界面)
 使用的是van-field 组件  注册按钮设置loading状态   
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/registerVue.png"></img> 
@@ -518,5 +538,6 @@ eg 用户名不能小于5为,成立,看密码,密码不能少于6为,比对两�
             },
 
 ```
+# [回到顶部](#vue-koa-全栈项目)
 
  
