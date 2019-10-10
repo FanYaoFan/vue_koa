@@ -148,5 +148,9 @@ fs.readFile( 'json文件路径', 'utf8', (err,data) => {
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getmainSubId.png"></img> 
 代码:
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getmainSubIdcode.png"></img>   
+#### 2.5.5  serviceAPI.js
+实际开发中,一般把各个接口配置放在一个js文件中. 如图  
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/serviceAPI.png"></img>
+
 ##  前台
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>
