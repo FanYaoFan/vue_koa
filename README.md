@@ -152,5 +152,102 @@ fs.readFile( 'json文件路径', 'utf8', (err,data) => {
 实际开发中,一般把各个接口配置放在一个js文件中. 如图  
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/serviceAPI.png"></img>
 
-##  前台
- <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>
+##  3 前台
+前台目录结构  
+ <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>   
+前台页面采用vant搭建基本页面 采用flex布局 axios请求后台数据    
+### 3.1  ShoppingMall.vue
+在create生命周期中,通过get请求url.getShoppingMallInfo接口,把拿到的数据渲染在页面上.也可以在methods中定义一个axios方法,然后再create生命周期中,以this.fn()调用这个方法.  
+```JavaScript  
+created() {
+    axios({
+      url: url.getShoppingMallInfo,
+      method: "get"
+    })
+      .then(response => {
+        if (response.status === 200) {
+          this.category = response.data.data.category;
+          console.log(response.data.data);
+          this.advertesPicture =
+            response.data.data.advertesPicture.PICTURE_ADDRESS;
+          this.recommend = response.data.data.recommend;
+          this.floor1 = response.data.data.floor1;
+          console.log(this.floor1);
+          this.floorName = response.data.data.floorName;
+          this.hotGoods = response.data.data.hotGoods;
+          console.log(this.hotGoods);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+```
+如图: 
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/ShoppingMallfirstPart.png"></img>  
+***
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/ShoppingMallsecondPart.png"></img>    
+#### 3.1.1 floorComponent 
+前台获取数据, 
+```JavaScript
+data(){return {floor1: [],floorName: []}}  
+<floorComponet :floorData="this.floor1" :floortitle="this.floorName.floor1"></floorComponet>  
+```  
+在floor组件中,通过watch监听数据的改变,从而实现数据的双向绑定 注: 这里为什么要用watch? 已经实际开发中,哪些是需要用到watch的?  
+```JavaScript  
+export default {
+        // 需要传递的数
+        props: ['floorDate'],
+        data(){
+            return {
+                floorDate0:[],
+                floorDate1:[],
+                floorDate2:[]
+            }
+        },
+         created(){
+            //这里写得不到数据，应为数据是延迟返回的
+            
+        },
+        watch :{
+            // 数据的双向绑定
+            floorData: val => {
+                this.floorDate0 = this.floorDate[0]
+                this.floorDate1 = this.floorDate[1]
+                this.floorDate2 = this.floorDate[2]
+            }
+        }
+}
+```  
+### 3.2 Goods 
+通过post向后台请求(url.getDetailGoodsInfo)并携带id参数.后台通过id查找返回数据
+如图:  
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/Goods.png"></img>
+#### 3.2.1 购物车添加逻辑  
+ 用到localstorage相关方法  
+思路:  
+1. 先判断localStorage(本地存储)里有没有商品,有就执行累加,没有接添加 
+2. 加入成功后跳转到购物车页面(已经有仍旧跳转,这里不太完美)  
+逻辑操作: 
+```JavaScript   
+let cartInfo = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo) : [] //设置一个变量来存储值
+let isHaveGoods = cartInfo.find( cart => cart.goodsId == this.goodsId)  // find方法来查看cartInfo是否有这个值(通过id来查找)
+// 没有,就添加新的商品  
+if(!isHavaGoods){
+//设置一个新商品
+let newGoodsInfo = {goodsId : this.goodsInfo.ID,
+Name : this.goodsInfo.NAME,
+price : this.goodsInfo.PRESENT_PRICE,
+image : this.goodsInfo.IMAGE1,
+count : 1
+}
+cartInfo.push(newGoodsInfo)
+localStorage.cartInfo = JSON.stringify(cartInfo)  //s => json 格式
+}
+ this.$router.push({name:'Cart'(路由名字)})  //进行跳转 也可以用path来跳转  this.$router.push( '/cart'(路由地址))
+```  
+### 3.3  Carts 购物车接算 
+
+
+
+ 
