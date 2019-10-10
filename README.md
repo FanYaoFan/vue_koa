@@ -123,5 +123,30 @@ fs.readFile( 'json文件路径', 'utf8', (err,data) => {
 #### 2.4.4 右侧子类的商品数据插入到数据库
 如图: 
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/categorySubdb.png"></img>
+ ***
+### 2.5  接口
+#### 2.5.1 首页接口
+点击图片,进入商品详情页 以id形式向后台(post发送请求),后台请求对应路由,在数据库中查找并返回数据  
+ <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getDetailGoods.png"></img>  
+ 代码:  
+  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getGoodscode.png"></img>  
+#### 2.5.2 列表左侧数据接口  
+如图:   
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getCategoryList.png"></img>  
+代码:  
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getCategoryListCode.png"></img> 
+#### 2.5.3  列表右侧导航接口  
+如图: 
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getCategorySublistTab.png"></img> 
+代码:  
+
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/categorySubListCode.png"></img>   
+
+
+#### 2.5.4  主体商品数据接口
+如图:  
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getmainSubId.png"></img> 
+代码:
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getmainSubIdcode.png"></img>   
 ##  前台
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>
