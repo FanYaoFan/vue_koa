@@ -170,7 +170,7 @@ fs.readFile( 'json文件路径', 'utf8', (err,data) => {
 #### 2.5.5  serviceAPI.js
 实际开发中,一般把各个接口配置放在一个js文件中. 如图  
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/serviceAPI.png"></img>  
-# [回到顶部](#vue-koa-全栈项目)
+## [回到顶部](#vue-koa-全栈项目)
 ##  3 前台
 前台目录结构  
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>   
@@ -265,7 +265,7 @@ localStorage.cartInfo = JSON.stringify(cartInfo)  //s => json 格式
 }
  this.$router.push({name:'Cart'(路由名字)})  //进行跳转 也可以用path来跳转  this.$router.push( '/cart'(路由地址))
 ```   
-# [回到顶部](#vue-koa-全栈项目)  
+## [回到顶部](#vue-koa-全栈项目)  
 ### 3.3  Carts 购物车接算 
 如图: 
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/cart.png"></img>  
@@ -400,7 +400,7 @@ data() {
     },
   }
 ```  
-# [回到顶部](#vue-koa-全栈项目)  
+## [回到顶部](#vue-koa-全栈项目)  
 ### 3.5  register(注册界面)
 使用的是van-field 组件  注册按钮设置loading状态   
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/registerVue.png"></img> 
@@ -539,6 +539,6 @@ eg 用户名不能小于5为,成立,看密码,密码不能少于6为,比对两�
             },
 
 ```
-# [回到顶部](#vue-koa-全栈项目)
+## [回到顶部](#vue-koa-全栈项目)
 
  
