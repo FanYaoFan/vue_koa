@@ -247,6 +247,10 @@ localStorage.cartInfo = JSON.stringify(cartInfo)  //s => json 格式
  this.$router.push({name:'Cart'(路由名字)})  //进行跳转 也可以用path来跳转  this.$router.push( '/cart'(路由地址))
 ```  
 ### 3.3  Carts 购物车接算 
+如图: 
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/cart.png"></img>  
+### 3.4 CategoryList 
+
 
 
 
