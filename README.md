@@ -379,10 +379,144 @@ data() {
       this.onLoad();
     },
   }
+```
+### 3.5  register(注册界面)
+使用的是van-field 组件  注册按钮设置loading状态   
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/registerVue.png"></img> 
+思路: 请求后台的注册路由,注册成功,返回code:200,(将注册信息插入到数据库中)并跳转路由到主界面,失败,弹出注册失败信息  
+表单验证方法:    
+eg 用户名不能小于5为,成立,看密码,密码不能少于6为,比对两次输入的密码是否一致.  
+```JavaScript 
+ data () {
+            return {
+              username : '',
+              password : '',  
+              openLoading : false, // 是否开启用户注册的loading状态
+              usernameErrorMsg : '',   //当用户名出现错误的时候
+              passwordErrorMsg : '',   //当密码出现错误的时候
+            }
+        },
+//注册方法: 
+ axiosRegisterUser () {
+                this.openLoading = true
+                axios ( {
+                    url : url.registerUser,
+                    method : 'post',
+                    data : {
+                         username : this.username, 
+                         password : this.password,
+                        
+                    }
+                })
+                .then( (response) => {
+                    console.log(response)
+                   if(response.status === 200){
+                        // Toast.success('注册成功')
+                        this.$router.push('/') // 注册成功跳转到首页,后期可以更改
+                        Toast.success('注册成功')
+                   }
+                   else{
+                       Toast.fail('注册失败')
+                        this.openLoading=false
+                   }
+                })
+                .catch( error => {
+                    console.log(error)
+                })
+            },
+            表单验证方法:  
+             checkForm(){
+            let isOk= true
+            if(this.username.length<5){
+                this.usernameErrorMsg="用户名不能小于5位"
+                isOk= false 
+            }else{
+                this.usernameErrorMsg=''
+            }
+            if(this.password.length<6){
+                this.passwordErrorMsg="密码不能少于6位"
+                isOk= false
+            }else{
+                this.passwordErrorMsg=''
+            }
+            return isOk
+                },
+    }
+        }
+```
+### 3.6  Login (登录界面)  
+在created生命周期中, 判断其是否登录(在localStorage中是否有其值)
+在localStorage中设置userInfo ={userName : this.username}  思考: 为什么要把登录放在一个Promise实例中??
+```JavaScript
+  data() {
+            return {
+                username: '',
+                password: '',
+                openLoading: false,    //是否开启用户的Loading
+                usernameErrorMsg:'',   //当用户名出现错误的时候
+                passwordErrorMsg:'',   //当密码出现错误的时候
+            }
+        },
+        created(){
+            if(localStorage.userInfo){
+                    Toast.success('您已经登录')
+                    this.$router.push('/')
+            }
+        },
+        methods: {
+            goBack() {
+                this.$router.go(-1)   
+            },
 
+            //*****注册用户的实行方法*****
+            LoginAction(){
+               
+                this.checkForm() && this.axiosLoginUser()
+            },
+
+            //*******axios注册用户方法*******
+            axiosLoginUser(){
+                    //先把按钮进行loading状态，防止重复提交
+                    this.openLoading = true
+
+                axios({
+                    url: url.registerUser,
+                    method: 'post',
+                    data:{
+                        userName:this.username,
+                        password:this.password 
+                    }
+                })
+                .then(response => {
+                    // localstorage 
+        new Promise((resolve,reject)=>{
+        localStorage.userInfo={userName:this.username}
+                 setTimeout(()=>{
+                    resolve()
+                            },500)
+                    }).then(()=>{
+                            Toast.success('登录成功')
+                            this.$router.push('/')
+                    }).catch(err=>{
+                            Toast.fail('登录状态保存失败')
+                            console.log(err)
+                    })
+                   if (response.status == 200){
+                       Toast.success('登录成功')
+                       this.$router.push('/')
+                   }else{
+                       Toast.fail('登录失败')
+                       this.openLoading = false
+                   }
+                        
+                })
+                .catch((error) => {   
+                   Toast.fail('登录失败')
+                   this.openLoading = false
+                })
+                        
+            },
 
 ```
-
-
 
  
