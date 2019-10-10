@@ -185,6 +185,7 @@ created() {
 ```
 如图: 
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/ShoppingMallfirstPart.png"></img>  
+***
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/ShoppingMallsecondPart.png"></img>  
 
 
