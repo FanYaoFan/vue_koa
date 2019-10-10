@@ -14,8 +14,9 @@
 ### [3.3 Carts](#33--carts-购物车结算)
 ### [3.4 categoryList](#34-categorylist)
 ### [3.5 Register](#35--register-注册界面)
-### [3.6 Login](#36--login-登录界面)
-***___
+### [3.6 Login](#36--login-登录界面)  
+***  
+___
 ## 1 总体目录结构
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/catalogue.png"></img>
 ## 2 后台 
