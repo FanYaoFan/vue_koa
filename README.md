@@ -250,7 +250,138 @@ localStorage.cartInfo = JSON.stringify(cartInfo)  //s => json 格式
 如图: 
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/cart.png"></img>  
 ### 3.4 CategoryList 
+如图:   
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/CategoryList.png"></img>  
+```JavaScript
+html:
+ <div id="list-div">
+            <van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
+              <van-list v-model="loading" :finished="finished" @load="onLoad">
+                <div
+                  class="list-item"
+                  v-for="(item , index) in goodList"
+                  :key="index"
+                  @click="goGoodsInfo(item.ID)"
+                >
+                  <!-- 右侧主体 -->
+                  <div class="list-item-img">
+                    <img :src="item.IMAGE1" width="100%" />
+                  </div>
+                  <div class="list-item-text">
+                    <div>{{item.NAME}}</div>
+                    <div class>￥{{item.ORI_PRICE | moneyFilter}}</div>
+                  </div>
+                </div>
+              </van-list>
+            </van-pull-refresh>
+          </div>
+//data中的数据:   
+data() {
+    return {
+      category: [],
+      categoryIndex: 0,
+      categorySub: [], // 右侧列表数据
+      active: 0,
+      loading: false, // 上拉加载
+      finished: false, //上拉加载是否有数据
 
+      isRefresh: false, //下拉刷新状态
+      page: 1, //商品列表的页数
+      goodList: [], // 商品列表信息
+      categorySubId: "" //商品子类id
+    };
+  },
+  methods: {
+   clickCategory(index, categoryId) {
+      this.categoryIndex = index;
+      // 当点击的时候调用getCategorySubId(categoryId)这个方法
+      //  点击大类的初始化操作
+      this.page = 1;
+      this.finished = false;
+      this.goodList = [];
+      this.getCategorySubId(categoryId);
+    },
+    // 根据左侧导航传过来的id 读取右侧列表
+    getCategorySubId(categoryId) {
+      axios({
+        url: url.getCategorySublist,
+        method: "post",
+        data: { categoryId: categoryId }
+      })
+        .then(response => {
+          //  console.log(response + 1)
+          if (response.status === 200 && response.data.message) {
+            this.categorySub = response.data.message;
+            this.active = 0; // 切换的时候
+          } else {
+            Toast("服务器错误，数据取得失败");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    // 上拉加载方法
+    onLoad() {
+      setTimeout(() => {
+        // 当这个值有的时候 就等于 this.categorySubID , 没有的时候就等于子类的第一组数据
+        this.categorySubId = this.categorySubId
+          ? this.categorySubId
+          : this.categorySub[0].ID;
+        this.getGoodList();
+      }, 1000);
+    },
+    // 下拉刷新方法
+    onRefresh() {
+      setTimeout(() => {
+        this.isRefresh = false;
+        this.goodList = []; //清空
+        this.page = 1;
+        this.onLoad(); //重新刷新
+        this.finished = false; //保证下拉还能刷新
+      }, 1000);
+    },
+
+    getGoodList() {
+      axios({
+        url: url.getGoodsSubID,
+        // url : url.getCategorySublist,
+        method: "post",
+        data: {
+          categorySubId: this.categorySubId,
+          page: this.page
+          //传的参数
+        }
+      })
+        .then(response => {
+          console.log(response + "hello why");
+          if (response.status === 200 && response.data.message) {
+            this.page++;
+            console.log(response.data.message);
+            this.goodList = this.goodList.concat(response.data.message);
+          } else {
+            this.finished = true;
+          }
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    // 点击子类的方法
+    onClickCategorySub(index, title) {
+      this.categorySubId = this.categorySubId[index].ID;
+      //   初始化操作
+      this.goodList = [];
+      this.finished = false;
+      this.page = 1;
+      this.onLoad();
+    },
+  }
+
+
+```
 
 
 
