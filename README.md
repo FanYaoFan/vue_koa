@@ -1,4 +1,22 @@
-# Vue Koa 全栈项目  
+# Vue Koa 全栈项目
+***
+## 目录 
+## [1 总体目录结构](#1-总体目录结构)
+## [2 后台](#2-后台)  
+### [2.1 init连接数据库](#21--init-连接数据库)
+### [2.2 glob](#22-glob)
+### [2.3 Schema](#23-schema)
+### [2.4 koa路由模块化](#24-koa路由模块化)
+### [2.5 接口](#25--接口)
+## [3 前台](#3-前台)
+### [3.1 ShoppingMall](#31--shoppingmall)
+### [3.2 Goods](#32--goods)
+### [3.3 Carts](#33--carts-购物车结算)
+### [3.4 categoryList](#34-categorylist)
+### [3.5 Register](#35--register-注册界面)
+### [3.6 Login](#36--login-登录界面)  
+***  
+___
 ## 1 总体目录结构
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/catalogue.png"></img>
 ## 2 后台 
@@ -8,7 +26,7 @@
 #### 2.1.1  mongoose  
 使用mongoose来连接数据库.(如果忘记数据库地址可以直接使用mongo来查看数据库地址)
 `mongoose.connect ('mongodb://localhost/app,{autoIndex : false}, {userNewUrlParser : true }`  
-#### 2.2.2  glob
+### 2.2  glob
 ```javascript
 npm install glob --save
 const glob = require('glob')  
@@ -21,6 +39,7 @@ const {resolve} = require('path')
 exports.initSchemas(自定义名称) = () => { glob.sync(resolve(__dirname, './schmea/', '**/*.js')).forEach(require)}
 ```   
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/init.png"></img>
+
 ### 2.3 Schema  
 数据库中的Schema是为数据库对象的集合的一种映射,每个schema会映射到mongodb中的一个collection,它不具备操作数据库的能力
 #### 2.3.1 定义数据库模型(约束) 
@@ -150,8 +169,8 @@ fs.readFile( 'json文件路径', 'utf8', (err,data) => {
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/getmainSubIdcode.png"></img>   
 #### 2.5.5  serviceAPI.js
 实际开发中,一般把各个接口配置放在一个js文件中. 如图  
-<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/serviceAPI.png"></img>
-
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/serviceAPI.png"></img>  
+## [回到顶部](#vue-koa-全栈项目)
 ##  3 前台
 前台目录结构  
  <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/fe.png" height="300"></img>   
@@ -245,7 +264,8 @@ cartInfo.push(newGoodsInfo)
 localStorage.cartInfo = JSON.stringify(cartInfo)  //s => json 格式
 }
  this.$router.push({name:'Cart'(路由名字)})  //进行跳转 也可以用path来跳转  this.$router.push( '/cart'(路由地址))
-```  
+```   
+## [回到顶部](#vue-koa-全栈项目)  
 ### 3.3  Carts 购物车接算 
 如图: 
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/cart.png"></img>  
@@ -379,10 +399,146 @@ data() {
       this.onLoad();
     },
   }
+```  
+## [回到顶部](#vue-koa-全栈项目)  
+### 3.5  register(注册界面)
+使用的是van-field 组件  注册按钮设置loading状态   
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/fe/registerVue.png"></img> 
+思路: 请求后台的注册路由,注册成功,返回code:200,(将注册信息插入到数据库中)并跳转路由到主界面,失败,弹出注册失败信息  
+表单验证方法:    
+eg 用户名不能小于5为,成立,看密码,密码不能少于6为,比对两次输入的密码是否一致.  
+```JavaScript 
+ data () {
+            return {
+              username : '',
+              password : '',  
+              openLoading : false, // 是否开启用户注册的loading状态
+              usernameErrorMsg : '',   //当用户名出现错误的时候
+              passwordErrorMsg : '',   //当密码出现错误的时候
+            }
+        },
+//注册方法: 
+ axiosRegisterUser () {
+                this.openLoading = true
+                axios ( {
+                    url : url.registerUser,
+                    method : 'post',
+                    data : {
+                         username : this.username, 
+                         password : this.password,
+                        
+                    }
+                })
+                .then( (response) => {
+                    console.log(response)
+                   if(response.status === 200){
+                        // Toast.success('注册成功')
+                        this.$router.push('/') // 注册成功跳转到首页,后期可以更改
+                        Toast.success('注册成功')
+                   }
+                   else{
+                       Toast.fail('注册失败')
+                        this.openLoading=false
+                   }
+                })
+                .catch( error => {
+                    console.log(error)
+                })
+            },
+            表单验证方法:  
+             checkForm(){
+            let isOk= true
+            if(this.username.length<5){
+                this.usernameErrorMsg="用户名不能小于5位"
+                isOk= false 
+            }else{
+                this.usernameErrorMsg=''
+            }
+            if(this.password.length<6){
+                this.passwordErrorMsg="密码不能少于6位"
+                isOk= false
+            }else{
+                this.passwordErrorMsg=''
+            }
+            return isOk
+                },
+    }
+        }
+```
+### 3.6  Login (登录界面)  
+在created生命周期中, 判断其是否登录(在localStorage中是否有其值)
+在localStorage中设置userInfo ={userName : this.username}  思考: 为什么要把登录放在一个Promise实例中??
+```JavaScript
+  data() {
+            return {
+                username: '',
+                password: '',
+                openLoading: false,    //是否开启用户的Loading
+                usernameErrorMsg:'',   //当用户名出现错误的时候
+                passwordErrorMsg:'',   //当密码出现错误的时候
+            }
+        },
+        created(){
+            if(localStorage.userInfo){
+                    Toast.success('您已经登录')
+                    this.$router.push('/')
+            }
+        },
+        methods: {
+            goBack() {
+                this.$router.go(-1)   
+            },
 
+            //*****注册用户的实行方法*****
+            LoginAction(){
+               
+                this.checkForm() && this.axiosLoginUser()
+            },
+
+            //*******axios注册用户方法*******
+            axiosLoginUser(){
+                    //先把按钮进行loading状态，防止重复提交
+                    this.openLoading = true
+
+                axios({
+                    url: url.registerUser,
+                    method: 'post',
+                    data:{
+                        userName:this.username,
+                        password:this.password 
+                    }
+                })
+                .then(response => {
+                    // localstorage 
+        new Promise((resolve,reject)=>{
+        localStorage.userInfo={userName:this.username}
+                 setTimeout(()=>{
+                    resolve()
+                            },500)
+                    }).then(()=>{
+                            Toast.success('登录成功')
+                            this.$router.push('/')
+                    }).catch(err=>{
+                            Toast.fail('登录状态保存失败')
+                            console.log(err)
+                    })
+                   if (response.status == 200){
+                       Toast.success('登录成功')
+                       this.$router.push('/')
+                   }else{
+                       Toast.fail('登录失败')
+                       this.openLoading = false
+                   }
+                        
+                })
+                .catch((error) => {   
+                   Toast.fail('登录失败')
+                   this.openLoading = false
+                })
+                        
+            },
 
 ```
-
-
+## [回到顶部](#vue-koa-全栈项目)
 
  
