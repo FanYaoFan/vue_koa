@@ -8,7 +8,7 @@
 ### [2.3 Schema](#23-schema)
 ### [2.4 koa路由模块化](#24-koa路由模块化-1)
 ### [2.5 接口](#25--接口)
-### [2.6 服务器开启](#26-服务器开启)
+### [2.6 服务器开启](#26-服务器开启-1)
 ## [3 前台](#3-前台)
 ### [3.1 ShoppingMall](#31--shoppingmall)
 ### [3.2 Goods](#32--goods)
@@ -175,7 +175,7 @@ fs.readFile( 'json文件路径', 'utf8', (err,data) => {
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/serviceAPI.png"></img>  
 #### 2.6 服务器开启
 建立index.js 文件中, 引入所有模块,node index.js 开启服务器 
-<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/BackGoods/serviceJs.png"></img>
+<img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/serviceJs.png"></img>
 ## [回到顶部](#vue-koa-全栈项目)
 ##  3 前台
 前台目录结构  
