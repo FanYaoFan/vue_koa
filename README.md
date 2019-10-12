@@ -10,10 +10,10 @@
 ### [2.5 接口](#25--接口)
 ### [2.6 服务器开启](#26-服务器开启-1)
 ## [3 前台](#3-前台)
-### [3.1 ShoppingMall](#31--shoppingmall)
-### [3.2 Goods](#32--goods)
+### [3.1 ShoppingMall](#31--shoppingmallvue)
+### [3.2 Goods](#32--goods-1)
 ### [3.3 Carts](#33--carts-购物车结算)
-### [3.4 categoryList](#34-categorylist)
+### [3.4 categoryList](#34-categorylist-1)
 ### [3.5 Register](#35--register-注册界面)
 ### [3.6 Login](#36--login-登录界面)  
 ***  
