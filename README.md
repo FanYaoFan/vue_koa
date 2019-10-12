@@ -17,6 +17,8 @@
 ### [3.6 Login](#36--login-登录界面)  
 ***  
 ___
+## [预览图](https://github.com/FanYaoFan/vue_koa/blob/master/img/app.gif)
+***
 ## 1 总体目录结构
 <img src="https://github.com/FanYaoFan/vue_koa/blob/master/img/backend/catalogue.png"></img>
 ## 2 后台 
