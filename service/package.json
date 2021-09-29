@@ -6,7 +6,7 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "index.js": "^0.0.3",
     "koa": "^2.8.1",
     "koa-bodyparser": "^4.2.1",
